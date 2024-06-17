@@ -10,44 +10,44 @@ Note: There is IsDebuggerPresent api in here, which checks if this program is ru
 
 So first i downloaded the crackme me and unzip it and try to run it. While running it will ask for username and Serial key as shown in image below.
 
-![alt text](image-4.png)
+![alt text](../images/image-4.png)
 
 On entering Name and Serial it shows the message 
 
-![alt text](image-5.png)
+![alt text](../images/image-5.png)
 
 Now let's reverse engineer this...
 
 Now open in IDA and look the strings
 
-![alt text](image-6.png)
+![alt text](../images/image-6.png)
 
 to view strings windows in IDA you can use shortcut (Shift + F12)
 
 after i opend it in 32dbg and it look like this 
-![alt text](image-7.png)
+![alt text](../images/image-7.png)
 
 drag it in 32dbg 
 
-![alt text](image-8.png)
+![alt text](../images/image-8.png)
 
 now i searched for strings in 32dbg how i searched let see...
 
-![alt text](image-9.png)
+![alt text](../images/image-9.png)
 
 right click in cpu section and click on search for then click all module and click on string references when you click it look like this..
 
-![alt text](image-10.png)
+![alt text](../images/image-10.png)
 
 so now i added a break point at or you can go like this.
 
 
-![alt text](image-11.png)
+![alt text](../images/image-11.png)
 
 you can see below that good job msg has printed so the algorithm of passwrod will be before it so go to before just clikc on the selected part 
 after click it looked like this..
 
-![alt text](image-14.png)
+![alt text](../images/image-14.png)
 
 so add a break point 00401153 because here it is starting..
 
@@ -55,27 +55,27 @@ now restart the program you can press f9 or
 press (see in 32dbg how i did it )
 
 
-![alt text](image-17.png)
+![alt text](../images/image-17.png)
 
 click on that round and after it click on this 2 times (->) and then it will you ask for name and passowrd enter it and run the porgram 
 you will reach at where you  added the break point 
 
-![alt text](image-18.png)
+![alt text](../images/image-18.png)
 
-![alt text](image-19.png)
+![alt text](../images/image-19.png)
 
 and now we can see here algorithm lets crack how i crack it (basically according to your username it will show you the password at the end if you will continue stepover  but important thing is that how i write my keygen program in c++ i will show you so now i will explain how algorithm working .. for stepover short cut key (f8))
 
-![alt text](image-20.png)
+![alt text](../images/image-20.png)
 here a strlen function calls that calculates the length of our input username 
 
 you can see right here registers where you can see what is happening in registers so our input has moves in (edi register)
 
 now lets move next here you can see that the length moves into edx register (length of username = 8 you can count)
 
-![alt text](image-21.png)
+![alt text](../images/image-21.png)
 after next it here is we can see a loop ..
-![alt text](image-22.png)
+![alt text](../images/image-22.png)
 
 so in loop what is happening
 
@@ -109,7 +109,7 @@ now continue to step over till edx == eax
 you will jmp here see in the picture
 
 now i am out of loop:-> 
-![alt text](image-23.png)
+![alt text](../images/image-23.png)
 now here some happenig aithmetic calculations 
 lets understands it 
 
@@ -127,7 +127,7 @@ imul ecx,ecx,9-> (ecx = ecx*9)
 now step over and see what in ecx 
 and other registeres 
 
-![alt text](image-24.png)
+![alt text](../images/image-24.png)
 
 after it there is a one more loop we can see so lets understands it 
 ```
@@ -141,7 +141,7 @@ div ecx -> (reminder-> edx = eax%ecx)
 ```
 
 first lets see what is in eax register do step over 
-![alt text](image-25.png)
+![alt text](../images/image-25.png)
 
 ```
 eax = 00F24313 
@@ -150,7 +150,7 @@ ecx = 10
 
 you can see loop here lets understand see below 
 
-![ alt text](image-27.png)
+![ alt text](../images/image-27.png)
 
 ```c
 first..
@@ -180,20 +180,20 @@ lets what is in store string after one iteration of loop
 
 ```
 
-![alt text](image-28.png)
+![alt text](../images/image-28.png)
 in esi register first 8 second 3 third store 8 and then 8 
 
 after the out of loop lets what stores in esi 
 
 
 
-![alt text](image-29.png) 
+![alt text](../images/image-29.png) 
 
 esi = "838867851"
 
 step over next  we found a one more loop lets understands it 
 
-![alt text](image-30.png) 
+![alt text](../images/image-30.png) 
 so now ebx = 9 
 
 actually this loop this loop is traversing esi in reverse order and storeing the byte (reversing the esi sting ) 
@@ -201,7 +201,7 @@ actually this loop this loop is traversing esi in reverse order and storeing the
 out of this loop lets see registers what happens 
 step over ...
 
-![alt text](image-31.png)
+![alt text](../images/image-31.png)
 
 
 here in this picture we can see this  in below the password comparing with some other string 
@@ -220,8 +220,8 @@ lets vrify this ...
 username = username
 password = 158768838rname
 
-![alt text](image-32.png)
-![alt text](image-33.png)
+![alt text](../images/image-32.png)
+![alt text](../images/image-33.png)
 
 
 so we have got the passowrd 
@@ -340,15 +340,15 @@ return 0;
 
 ```
 
-![alt text](image-34.png)
+![alt text](../images/image-34.png)
 
 name = ajay
 password = 107327223y
 
 
-![alt text](image-35.png)
+![alt text](../images/image-35.png)
 
-![alt text](image-36.png)
+![alt text](../images/image-36.png)
 
 <hr>
 
